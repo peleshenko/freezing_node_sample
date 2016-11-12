@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <style>
+            @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+            h2 {
+                animation:spin 1s linear infinite;
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Freezing Application</h1>
+        <button onclick="freeze()">Freeze with loop</button>
+        <button onclick="freezeWithMain()">Freeze with loop in main process</button>
+        <h2>running</h2>
+        <input type="text" />
+        <script>
+            function freeze(){
+                var x = 0;
+                for(var i = 0; i < 40000000000; i++)
+                {
+                    x++;
+                }
+            }
+
+            function freezeWithMain(){
+                require("electron").ipcRenderer.send("freeze");
+            }
+        </script>
+    </body>
+</html
